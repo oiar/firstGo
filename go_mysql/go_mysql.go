@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
-) 
+)
 
 func main() {
 	db, err := sql.Open("mysql", "root:123456@tcp(127.0.0.1:3306)/?parseTime=true")
@@ -16,7 +16,7 @@ func main() {
 	err = db.Ping()
 	if err != nil {
 		fmt.Print(err.Error())
-	} 
+	}
 
 	_, err = db.Exec("CREATE DATABASE AAA;")
 	if err != nil {
@@ -52,8 +52,6 @@ func main() {
 		if err != nil {
 			fmt.Println(err)
 		}
-
 		fmt.Println(result, id, name, age)
 	}
-
 }

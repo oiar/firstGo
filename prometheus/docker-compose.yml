@@ -1,0 +1,47 @@
+version: '3'
+services:
+  # mysql:
+  #   image: mysql:5.7
+  #   ports:
+  #     - "3309:3309"
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=password
+  #     - MYSQL_DATABASE=database
+
+  # mysqlexporter:
+  #   image: prom/mysqld-exporter
+  #   ports:
+  #     - "9104:9104"
+  #   environment:
+  #     - DATA_SOURCE_NAME=root:password@(mysql:3306)/database
+
+  # mongo:
+  #   image: mongo
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: root
+  #     MONGO_INITDB_ROOT_PASSWORD: example
+
+  # mongodb-exporter:
+  #   build: .
+  #   # image: mongodb-exporter
+  #   ports:
+  #     - "9200:9200"
+  #   environment:
+  #     - MONGODB_URI=mongodb://mongodb_exporter:passw0rd@localhost:27017
+
+  mongo:
+    container_name: mongo-single
+    image: mongo:4.2.0-bionic
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: single
+    ports:
+      - "27017:27017"
+
+  mongodb-exporter:
+    build: ./mongodb_exporter-master
+    # image: elarasu/mongodb_exporter
+    ports:
+      - "9216:9216"
+    environment:
+      - MONGODB_URI=mongodb://root:single@192.168.0.114:27017

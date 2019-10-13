@@ -34,7 +34,7 @@ func main() {
 		fmt.Printf("User Table successfully ....")
 	}
 
-	_, err = db.Exec(`INSERT INTO AAA.user ( name, age) VALUES ("abcd", '30');`)
+	_, err = db.Exec(`INSERT INTO AAA.user ( name, age) VALUES ("asdjlfk", '30');`)
 	if err != nil {
 		fmt.Println(err.Error())
 	}

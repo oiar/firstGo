@@ -4,11 +4,11 @@ import (
 	"database/sql"
 	"fmt"
 
-	_ "github.com/go-sql-driver/mysql"
+	 _ "github.com/go-sql-driver/mysql"
 )
 
 func main() {
-	db, err := sql.Open("mysql", "root:123456@tcp(127.0.0.1:3306)/?parseTime=true")
+	db, err := sql.Open("mysql", "root:123456@tcp(192.168.0.254:3306)/?parseTime=true")
 	if err != nil {
 		fmt.Print(err.Error())
 	}
@@ -18,12 +18,12 @@ func main() {
 		fmt.Print(err.Error())
 	}
 
-	_, err = db.Exec("CREATE DATABASE AAA;")
+	_, err = db.Exec("CREATE DATABASE class;")
 	if err != nil {
 		fmt.Print(err.Error())
 	}
 
-	stmt, err := db.Prepare("CREATE TABLE AAA.user (id int NOT NULL AUTO_INCREMENT, name TEXT(10), age varchar(40), PRIMARY KEY (id));")
+	stmt, err := db.Prepare("CREATE TABLE class.user (id int NOT NULL AUTO_INCREMENT, name TEXT(10), age varchar(40), PRIMARY KEY (id));")
 	if err != nil {
 		fmt.Print(err.Error())
 	}
@@ -34,7 +34,7 @@ func main() {
 		fmt.Printf("User Table successfully ....")
 	}
 
-	_, err = db.Exec(`INSERT INTO AAA.user ( name, age) VALUES ("asdjlfk", '30');`)
+	_, err = db.Exec(`INSERT INTO class.user (name, age) VALUES ("a", '13');`)
 	if err != nil {
 		fmt.Println(err.Error())
 	}
@@ -44,8 +44,8 @@ func main() {
 		name string
 		age  int
 	)
-
-	result, err := db.Query("SELECT * FROM AAA.user;")
+	
+	result, err := db.Query("SELECT * FROM class.user;")
 
 	for result.Next() {
 		err = result.Scan(&id, &name, &age)

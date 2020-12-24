@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func work(ctx context.Context, workName string) {
+func work1(ctx context.Context, workName string) {
 	for {
 		select {
 		case <- ctx.Done():
@@ -21,8 +21,8 @@ func work(ctx context.Context, workName string) {
 
 func main() {
 	ctx, cancel := context.WithCancel(context.Background())
-	go work(ctx, "work1")
-	go work(ctx, "work2")
+	go work1(ctx, "work1")
+	go work1(ctx, "work2")
 	time.Sleep(3 * time.Second)
 
 	cancel()
